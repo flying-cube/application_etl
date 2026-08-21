@@ -1,0 +1,6 @@
+*pycache*
+
+config/database.ini
+config/paths.ini
+
+data/excel_table.xlsm
