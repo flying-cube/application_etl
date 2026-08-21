@@ -6,7 +6,7 @@ from config import config, create_connection_string
 def main():
     home = config("config/paths.ini", "home")["path"]
     file = f"{home}/data/excel_table.xlsm"
-    config_file = f"{home}/database.ini"
+    config_file = f"{home}/config/database.ini"
 
     postgresql_schema = "raw"
     postgresql_table_name = "applications"
