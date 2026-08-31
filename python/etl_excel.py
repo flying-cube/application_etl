@@ -1,23 +1,20 @@
 import pandas as pd
-from sqlalchemy import create_engine
-from config import config, create_connection_string
+from config import config
 
-
-def main():
-    home = config("config/paths.ini", "home")["path"]
-    file = f"{home}/data/excel_table.xlsm"
-    config_file = f"{home}/config/database.ini"
-
-    postgresql_schema = "raw"
-    postgresql_table_name = "applications"
+def extract(config_file="config/paths.ini", file_path="data/excel_table.xlsm", sheet_name="Gesamte Tabelle", usecols="A, C, D, E, F, G, H, I, J, K, L, M, N, O, P, R"):
+    home = config(config_file, "home")["path"]
+    file = f"{home}/{file_path}"
 
     ############
     ## EXTRACT
     ############
 
     # extract data from the Excel file
-    df = pd.read_excel(file, sheet_name="Gesamte Tabelle", usecols="A, C, D, E, F, G, H, I, J, K, L, M, N, O, P, R")
+    df = pd.read_excel(file, sheet_name=sheet_name, usecols=usecols)
+    
+    return df
 
+def transform(df):
     ############
     ## TRANSFORM
     ############
@@ -29,30 +26,26 @@ def main():
             df[col] = (pd.to_datetime(df[col]).dt.date).fillna(value=None)
         elif df[col].dtype == "string":
             df[col] = df[col].fillna(value="")
+    
+    return df
 
-
+def load(df, engine, schema="raw", table_name="applications"):
     ############
     ## LOAD
     ############
 
-    # establish connection to the database
-    conn_string = create_connection_string(config_file, "postgresql")
-    engine = create_engine(conn_string, echo=False)
-
     # load dataframe into database using SQLAlchemy
     # replace entire table for now
-    df.to_sql(postgresql_table_name,
+    df.to_sql(table_name,
               con=engine,
-              schema=postgresql_schema,
+              schema=schema,
               if_exists="replace",
               index=False)
 
+def validate_load(engine, schema="raw", table_name="applications"):
     # verify that the data was loaded successfully by counting the number of rows in the table
     with engine.connect() as connection:
         row_count = connection.exec_driver_sql(
-            f'SELECT COUNT(*) FROM "{postgresql_schema}"."{postgresql_table_name}"'
+            f'SELECT COUNT(*) FROM "{schema}"."{table_name}"'
         ).scalar_one()
-    print(f"Wrote {row_count} rows to {postgresql_schema}.{postgresql_table_name}")
-
-if __name__ == "__main__":
-    main()
+        return row_count
