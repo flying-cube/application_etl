@@ -1,5 +1,29 @@
-# ETL Tool for application tracking
+# Job Application Data Pipeline
 
-A small project to utilize python as ETL tool.
+## Overview
+Deliberately overengineered ETL architecture for small personal dataset to practice data ingestion, PostgresSQL transformations, data quality checks and Power BI reporting.
 
-Extract data from my master excel file and bring it into a postgresSQL database
+## Pipeline
+
+1. Manual entries into Excel
+2. Python script to process raw data into database, validate source structure
+3. Clean and standardize in staging
+4. Add simple analytics logicin mart
+5. Refresh Power BI dashboard
+
+## Dashboard
+
+![dashboard_overview](images/dashboard_full.png)
+![dashboard_filtered_country](images/dashboard_filtered_country.png)
+![dashboard_filtered_status](images/dashboard_filtered_status.png)
+
+KPIs:
+- Applications sent
+- Active applications
+- Interviews & Interview rate
+
+Visuals:
+- Applications per week
+- Current Pipeline
+- Outcomes per country
+- Active applications table
