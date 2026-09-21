@@ -14,8 +14,8 @@ Deliberately overengineered ETL architecture for small personal dataset to pract
 ## Dashboard
 
 ![dashboard_overview](images/dashboard_full.png)
-![dashboard_filtered_country](images/dashboard_filtered_country.png)
-![dashboard_filtered_status](images/dashboard_filtered_status.png)
+![dashboard_filtered_country](images/dashboard_filter_country.png)
+![dashboard_filtered_status](images/dashboard_filter_status.png)
 
 KPIs:
 - Applications sent
