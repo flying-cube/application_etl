@@ -8,3 +8,5 @@ data/excel_table.xlsm
 *.pbix
 
 logs/
+
+*.bat

@@ -1,7 +1,7 @@
 import pandas as pd
 from config import config
 
-def extract(config_file="config/paths.ini", file_path="data/excel_table.xlsm", sheet_name="Gesamte Tabelle", usecols="A, C, D, E, F, G, H, I, J, K, L, M, N, O, P, R"):
+def extract(config_file="config/paths.ini", file_path="data/excel_table.xlsm", sheet_name="Gesamte Tabelle", usecols="A, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q"):
     home = config(config_file, "home")["path"]
     file = f"{home}/{file_path}"
 

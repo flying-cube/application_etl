@@ -11,7 +11,7 @@ def pipeline(
     config_file="config/paths.ini",
     file_path="data/excel_table.xlsm",
     sheet_name="Gesamte Tabelle",
-    usecols="A, C, D, E, F, G, H, I, J, K, L, M, N, O, P, R",
+    usecols="A, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q",
     schema="raw",
     table_name="applications",
 ):
